@@ -295,7 +295,7 @@
         };
 
         document.getElementById("search").addEventListener("input", function() {
-            let query = this.value.toLowerCase();
+            let query = this.value.toLowerCase().replace(/\s/g, "");
             let product = products[query];
             let productDiv = document.getElementById("product");
 
