@@ -52,6 +52,12 @@
             width: 100%;
             border-radius: 10px;
         }
+
+        @media (max-width: 768px) {
+            .mosaic-item {
+                width: calc(100% / 2 - 10px);
+            }
+        }
     </style>
 </head>
 <body>
@@ -70,12 +76,12 @@
     <script>
         const products = {
             "pecorina": {
-                name: "pecorina",
+                name: "Pecorina",
                 image: "./assets/pecorina.png",
                 description: "Creme de Pecorino, Nduja, pecorino ralado e mussarela."
             },
             "chutney": {
-                name: "chutney essa manga",
+                name: "Chutney essa manga",
                 image: "./assets/chutney.png",
                 description: "Presunto de Parma italiano, chutney de manga, lascas de parmesão e mussarela."
             },
@@ -96,29 +102,29 @@
                 description: "Coraçao de alcachofra, tomatinhos confitados, parmesão vegetal e mussarela vegetal."
             },
             "gianna": {
-                name: "gianna",
+                name: "Gianna",
                 image: "./assets/gianna.png",
                 description: "Mussarela, berinjela grelhada, parmesão, tomate assado no forno a lenha e manjericão."
             },
             "nduja": {
-                name: "nduja",
+                name: "Nduja",
                 image: "./assets/nduja.png",
                 description: "Mussarela de búfala, Nduja, salaminho picante e melaço de cana."
             },
 
             "altopiano": {
-                name: "altopiano",
+                name: "Altopiano",
                 image: "./assets/altopiano.png",
                 description: "Queijo Fontina, funghi artesanal e mussarela"
             },
             "abobrinha": {
-                name: "abobrinha",
+                name: "Abobrinha",
                 image: "./assets/abobrinha.jpg",
                 description: "Mussarela, calabresa, cebola, pimenta, picles de cebola, cebolinha, tomate, orégano e azeitona."
             },
 
             "atum": {
-                name: "atum",
+                name: "Atum",
                 image: "./assets/atum.jpg",
                 description: "Atum e Cebola."
             },
@@ -338,18 +344,20 @@
         }
 
         function createMosaic() {
-            const mosaicDiv = document.getElementById("mosaic");
-            Object.entries(products).forEach(([key, product]) => {
-                let itemDiv = document.createElement("div");
-                itemDiv.classList.add("mosaic-item");
-                itemDiv.innerHTML = `
-                    <img src="${product.image}" alt="${product.name}">
-                    <p>${product.name}</p>
-                `;
-                itemDiv.addEventListener("click", () => displayProduct(key));
-                mosaicDiv.appendChild(itemDiv);
-            });
-        }
+         const mosaicDiv = document.getElementById("mosaic");
+        Object.entries(products)
+        .sort((a, b) => a[1].name.localeCompare(b[1].name)) // Ordena os itens
+        .forEach(([key, product]) => {
+            let itemDiv = document.createElement("div");
+            itemDiv.classList.add("mosaic-item");
+            itemDiv.innerHTML = `
+                <img src="${product.image}" alt="${product.name}">
+                <p>${product.name}</p>
+            `;
+            itemDiv.addEventListener("click", () => displayProduct(key));
+            mosaicDiv.appendChild(itemDiv);
+        });
+    }
         
         createMosaic();
     </script>
