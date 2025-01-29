@@ -32,6 +32,26 @@
             max-width: 100%;
             border-radius: 10px;
         }
+
+        .mosaic {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 20px;
+            max-width: 750px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        .mosaic-item {
+            width: 150px;
+            text-align: center;
+            cursor: pointer;
+        }
+        .mosaic-item img {
+            width: 100%;
+            border-radius: 10px;
+        }
     </style>
 </head>
 <body>
@@ -44,6 +64,8 @@
             <p id="description"></p>
         </div>
     </div>
+
+    <div class="mosaic" id="mosaic"></div>
     
     <script>
         const products = {
@@ -296,6 +318,10 @@
 
         document.getElementById("search").addEventListener("input", function() {
             let query = this.value.toLowerCase().replace(/\s/g, "");
+            displayProduct(query);
+        });
+
+        function displayProduct(query) {
             let product = products[query];
             let productDiv = document.getElementById("product");
 
@@ -305,10 +331,27 @@
                 document.getElementById("image").alt = product.name;
                 document.getElementById("description").innerText = product.description;
                 productDiv.style.display = "block";
+                window.scrollTo({ top: 0, behavior: 'smooth' });
             } else {
                 productDiv.style.display = "none";
             }
-        });
+        }
+
+        function createMosaic() {
+            const mosaicDiv = document.getElementById("mosaic");
+            Object.entries(products).forEach(([key, product]) => {
+                let itemDiv = document.createElement("div");
+                itemDiv.classList.add("mosaic-item");
+                itemDiv.innerHTML = `
+                    <img src="${product.image}" alt="${product.name}">
+                    <p>${product.name}</p>
+                `;
+                itemDiv.addEventListener("click", () => displayProduct(key));
+                mosaicDiv.appendChild(itemDiv);
+            });
+        }
+        
+        createMosaic();
     </script>
 </body>
 </html>
