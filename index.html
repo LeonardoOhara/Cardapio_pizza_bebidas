@@ -22,8 +22,11 @@
             border-radius: 5px;
         }
 
-        .popup {
+        .popup, .popup-overlay {
             display: none;
+        }
+
+        .popup {
             position: fixed;
             top: 50%;
             left: 50%;
@@ -33,6 +36,20 @@
             border-radius: 10px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
             z-index: 1000;
+            width: 300px;
+            height: 400px;
+            display: none; /* Garante que o popup esteja oculto inicialmente */
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .popup img {
+            width: 80%;
+            height: auto;
+            max-height: 250px;
+            object-fit: cover;
+            border-radius: 10px;
         }
         .popup-overlay {
             display: none;
@@ -364,10 +381,11 @@
                 document.getElementById("popupImage").src = product.image;
                 document.getElementById("popupImage").alt = product.name;
                 document.getElementById("popupDescription").innerText = product.description;
-                document.getElementById("popup").style.display = "block";
+                document.getElementById("popup").style.display = "flex";
                 document.getElementById("popupOverlay").style.display = "block";
             }
         }
+
 
         function createMosaic() {
             const mosaicDiv = document.getElementById("mosaic");
