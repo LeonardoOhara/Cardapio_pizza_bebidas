@@ -1,0 +1,55 @@
+
+
+
+/* Vídeo de fundo */
+#video-background {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Faz o vídeo cobrir toda a área */
+    transform: translate(-50%, -50%);
+}
+
+/* Botão com efeito de aproximação */
+#btn {
+    background: #e74c3c;
+    color: white;
+    border: none;
+    padding: 15px 30px;
+    font-size: 18px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: transform 0.3s ease, background 0.3s; /* Transição suave */
+    transform: translateZ(50px); /* Inicialmente está em 3D */
+    position: absolute; /* Faz o botão se posicionar em relação ao container */
+    z-index: 10; /* Garante que o botão fique sobre o vídeo */
+    top: 70%;
+    transform: translate(-50%, -50%);
+    
+
+    
+}
+
+
+#btn:hover {
+    background: #c0392b;
+    filter: blur(1px); /* Efeito de desfoque no botão */
+    
+   
+}
+
+
+.pizza_home {
+    width: 300px;
+    z-index: 2;
+    position: fixed;
+}
+
+.foto-logo {
+    display: flex;
+    justify-content: center;
+    
+}
+

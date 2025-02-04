@@ -1,21 +1,41 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Home</title>
-    <link rel="stylesheet" href="./CSS/pages/index.css">
+    <title>Efeito 3D Parallax</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./CSS/index.css">
 </head>
 <body>
-    <header>
-        <nav>
-            <a id="bt_home" href="index.html">Clique-Aqui!</a>
-        </nav>
-    </header>
-    <div>
-        <h1 class="bv_home">BEM VINDOS</h1>
-        <img id="pizza_home_img" src="./assets/pizza_template.jpg" alt="pizza">
-    </div>
+
     
+     <!-- Vídeo de fundo -->
+    <video autoplay muted loop id="video-background">
+        <source src="https://www.shutterstock.com/shutterstock/videos/3469566733/preview/stock-footage-close-up-of-delicious-pepperoni-pizza-with-salami-tomato-and-cheese-is-baking-in-electric-oven-at.webm" type="video/mp4">
+        Seu navegador não suporta o elemento de vídeo.
+    </video>
+    
+    <div class="foto-logo">
+        <img class="pizza_home" src="./assets/pizza_home.png" alt="">
+    </div>
+
+     <!-- Botão posicionado abaixo do  centro -->
+     <button id="btn" onclick="window.location.href='index.html'">Entrar</button>
+    
+    <script>
+        // Efeito de profundidade 3D no botão com o movimento do mouse
+        document.addEventListener("mousemove", function(event) {
+            let x = (window.innerWidth / 2 - event.pageX) / 20;
+            let y = (window.innerHeight / 2 - event.pageY) / 20;
+            document.querySelector(".parallax").style.transform = `translate(${x}px, ${y}px)`;
+
+            // O botão se aproxima do mouse (transformação 3D)
+            let scale = 1 + (Math.abs(x) + Math.abs(y)) / 100;
+            document.querySelector("#btn").style.transform = `translateZ(50px) scale(${scale})`;
+        });
+
+    </script>
+
 </body>
 </html>

@@ -1,0 +1,5 @@
+@import url('./pages/global/global.css');
+
+@import url(./pages/partials/partials.css);
+
+@import url(./mediaquery.css);
