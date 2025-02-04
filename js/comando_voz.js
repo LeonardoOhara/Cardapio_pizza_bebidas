@@ -289,16 +289,7 @@ if ('webkitSpeechRecognition' in window) {
      // Variável para controlar o estado da gravação
      let isRecognizing = false;
 
-        // Mostrar o loading durante o reconhecimento
-        recognition.onstart = function() {
-            document.getElementById('loading').style.display = 'inline-block'; // Exibe o loading
-        };
-    
-        // Remover o loading após o reconhecimento
-        recognition.onend = function() {
-            document.getElementById('loading').style.display = 'none'; // Esconde o loading
-        };
-
+ 
     // Ao reconhecer a fala, buscar o produto correspondente
     recognition.onresult = function(event) {
         const transcript = event.results[event.results.length - 1][0].transcript.toLowerCase(); // Pega a última transcrição

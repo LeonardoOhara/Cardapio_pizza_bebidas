@@ -4,15 +4,16 @@ body {
 }
 .container {
     max-width: 400px;
-    margin: 0 auto;
+    margin: 40px auto;
 }
 
 input {
-    width: 100%;
+    width: 90%;
     padding: 10px;
-    margin: 10px 0;
+    margin: 10px;
     border: 1px solid #ccc;
     border-radius: 5px;
+    
 }
 
 
@@ -104,4 +105,11 @@ input {
         text-align: center;
         font-size: 12px;
     }
+
+    .popup {
+        width: 300px;
+        height: 400px;   
+    }
+
+    
 } 
