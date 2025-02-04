@@ -43,7 +43,7 @@ const product = [
     },
 
      {
-        name: "Altopiano",
+        name: "alto",
         image: "./assets/altopiano.png",
         description: "Queijo Fontina, funghi artesanal e mussarela"
     },
@@ -138,7 +138,7 @@ const product = [
     },
 
      {
-        name: "Margherita Italiana",
+        name: "Marguerita Italiana",
         image: "./assets/margueritaitaliana.jpg",
         description: "Mussarela de búfala e manjericão."
     },
@@ -186,7 +186,7 @@ const product = [
     },
 
      {
-        name: "Panna",
+        name: "artesanal",
         image: "./assets/panna.jpg",
         description: "Panna, Presunto Parma italiano, azeite trufado e mussarela"
     },
@@ -281,13 +281,27 @@ popupClose.onclick = closePopup;
 // Abrir pop-up com comando de voz
 if ('webkitSpeechRecognition' in window) {
     const recognition = new webkitSpeechRecognition();
-    recognition.lang = 'pt-BR';
-    recognition.interimResults = false;
-    recognition.maxAlternatives = 1;
+    recognition.lang = 'pt-BR' , 'it-IT'; // Define o idioma para português
+    recognition.interimResults = true; // Permite resultados parciais enquanto fala
+    recognition.maxAlternatives = 2;
+    recognition.continuous = true; // Permite que o reconhecimento continue ouvindo
+
+     // Variável para controlar o estado da gravação
+     let isRecognizing = false;
+
+        // Mostrar o loading durante o reconhecimento
+        recognition.onstart = function() {
+            document.getElementById('loading').style.display = 'inline-block'; // Exibe o loading
+        };
+    
+        // Remover o loading após o reconhecimento
+        recognition.onend = function() {
+            document.getElementById('loading').style.display = 'none'; // Esconde o loading
+        };
 
     // Ao reconhecer a fala, buscar o produto correspondente
     recognition.onresult = function(event) {
-        const transcript = event.results[0][0].transcript.toLowerCase();
+        const transcript = event.results[event.results.length - 1][0].transcript.toLowerCase(); // Pega a última transcrição
         console.log("Você disse:", transcript);
         
         // Verifica se a transcrição inclui o nome do produto
@@ -299,9 +313,18 @@ if ('webkitSpeechRecognition' in window) {
         }
     };
 
-    // Iniciar o reconhecimento de voz ao clicar no botão
+    // Iniciar ou parar o reconhecimento de voz ao clicar no botão
     voiceButton.onclick = function() {
-        recognition.start();
+        if (isRecognizing) {
+            recognition.stop(); // Para o reconhecimento se estiver em andamento
+            voiceButton.textContent = "Clique para Falar"; // Muda o texto do botão
+            isRecognizing = false; // Atualiza o estado para "não reconhecendo"
+        } else {
+            recognition.start(); // Inicia o reconhecimento
+            voiceButton.textContent = "Clique para Parar"; // Muda o texto do botão
+            isRecognizing = true; // Atualiza o estado para "reconhecendo"
+        }
+    
     };
 } else {
     alert("A funcionalidade de comando de voz não é suportada neste navegador.");
