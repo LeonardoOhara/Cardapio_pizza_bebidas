@@ -6,12 +6,18 @@
     <title>Cardápio de Pizzas e Bebidas</title>
     <link rel="stylesheet" href="./CSS/pages/index.css">
     <script src="./js/cardapio.js" defer></script>
+    <script src="./js/comando_voz.js" defer></script>
 
 
 </head>
 <body>
+
+    <button id="voiceButton">Clique para falar</button>
+ 
     <div class="container">
         <h1>Busque seu Produto</h1>
+        <p>Pode ser clicando, buscando ou falando. <br> Experimente essas funções!
+        </p>
         <input type="text" id="search" placeholder="Digite o nome da pizza ou bebida...">
         <div id="product" class="product">
             <h2 id="name"></h2>
@@ -29,6 +35,8 @@
         <img id="popupImage" src="" alt="">
         <p id="popupDescription"></p>
     </div>
+    
+
     
 </body>
 </html>

@@ -1,0 +1,31 @@
+#pizza_home_img {
+    width: 400px;
+    margin-top: 30px;
+    
+}
+
+div > #pizza_home_img {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: auto;
+}
+
+#bt_home {
+    text-decoration: none;
+    color: aliceblue;
+    background-color: black;
+}
+
+.bv_home {
+    margin-top: 30px;
+    margin-bottom: 30px;
+    
+    
+}
+
+#bt_home:hover {
+    transition-delay: smooth;
+    color: black;
+    background-color: aliceblue;
+}

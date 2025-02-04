@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login e Cadastro</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background: linear-gradient(135deg, #6e8efb, #a777e3);
+            flex-direction: column;
+        }
+
+        .container {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            width: 350px;
+            text-align: center;
+        }
+
+        h2 {
+            margin-bottom: 15px;
+            color: #333;
+        }
+
+        input {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+
+        .btn {
+            background: #28a745;
+            color: white;
+            width: 100%;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: 0.3s;
+            font-size: 16px;
+        }
+
+        .btn:hover {
+            background: #218838;
+            transform: scale(1.05);
+        }
+
+        .switch {
+            margin-top: 10px;
+            color: #333;
+            cursor: pointer;
+            font-size: 14px;
+        }
+
+        .hidden {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <!-- Formulário de Login -->
+        <div id="loginForm">
+            <h2>Login</h2>
+            <input type="email" id="loginEmail" placeholder="E-mail">
+            <input type="password" id="loginPassword" placeholder="Senha">
+            <button class="btn" onclick="login()">Entrar</button>
+            <p class="switch" onclick="toggleForms()">Criar uma conta</p>
+        </div>
+
+        <!-- Formulário de Cadastro -->
+        <div id="registerForm" class="hidden">
+            <h2>Cadastro</h2>
+            <input type="text" id="registerName" placeholder="Nome">
+            <input type="email" id="registerEmail" placeholder="E-mail">
+            <input type="password" id="registerPassword" placeholder="Senha">
+            <button class="btn" onclick="register()">Cadastrar</button>
+            <p class="switch" onclick="toggleForms()">Já tem conta? Faça login</p>
+        </div>
+
+        <!-- Tela após login -->
+        <div id="welcomeScreen" class="hidden">
+            <h2>Bem-vindo, <span id="userName"></span>!</h2>
+            <button class="btn" onclick="logout()">Sair</button>
+        </div>
+    </div>
+
+    <script>
+        function toggleForms() {
+            document.getElementById("loginForm").classList.toggle("hidden");
+            document.getElementById("registerForm").classList.toggle("hidden");
+        }
+
+        function register() {
+            let name = document.getElementById("registerName").value;
+            let email = document.getElementById("registerEmail").value;
+            let password = document.getElementById("registerPassword").value;
+
+            if (name && email && password) {
+                let users = JSON.parse(localStorage.getItem("users")) || [];
+                if (users.some(user => user.email === email)) {
+                    alert("E-mail já cadastrado!");
+                    return;
+                }
+
+                users.push({ name, email, password });
+                localStorage.setItem("users", JSON.stringify(users));
+                alert("Cadastro realizado com sucesso!");
+                toggleForms();
+            } else {
+                alert("Preencha todos os campos!");
+            }
+        }
+
+        function login() {
+            let email = document.getElementById("loginEmail").value;
+            let password = document.getElementById("loginPassword").value;
+
+            let users = JSON.parse(localStorage.getItem("users")) || [];
+            let user = users.find(user => user.email === email && user.password === password);
+
+            if (user) {
+                localStorage.setItem("loggedUser", JSON.stringify(user));
+                showWelcomeScreen(user.name);
+            } else {
+                alert("E-mail ou senha incorretos!");
+            }
+        }
+
+        function showWelcomeScreen(name) {
+            document.getElementById("loginForm").classList.add("hidden");
+            document.getElementById("registerForm").classList.add("hidden");
+            document.getElementById("welcomeScreen").classList.remove("hidden");
+            document.getElementById("userName").innerText = name;
+        }
+
+        function logout() {
+            localStorage.removeItem("loggedUser");
+            document.getElementById("loginForm").classList.remove("hidden");
+            document.getElementById("welcomeScreen").classList.add("hidden");
+        }
+
+        // Verifica se há um usuário logado
+        let loggedUser = JSON.parse(localStorage.getItem("loggedUser"));
+        if (loggedUser) {
+            showWelcomeScreen(loggedUser.name);
+        }
+    </script>
+
+</body>
+</html>
