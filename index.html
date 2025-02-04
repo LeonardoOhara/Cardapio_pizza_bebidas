@@ -1,46 +1,41 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="pt">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cardápio de Pizzas e Bebidas</title>
+    <title>Efeito 3D Parallax</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="./CSS/index.css">
-    <script src="./js/cardapio.js" defer></script>
-    <script src="./js/comando_voz.js" defer></script>
-    <script src="./js/acessibilidade.js" defer></script>
-
-
 </head>
 <body>
 
-    <div id="toggle-button-container">
-        <button id="voiceButton">Clique para falar</button> 
-        <button id="toggle-button" onclick="toggleLeitura()">Ativar Leitura</button>
-    </div>
-        
-    <div class="container">
-        <h1>Busque seu Produto</h1>
-        <p>Pode ser clicando, buscando ou falando. <br> Experimente essas funções!
-        </p>
-        <input type="text" id="search" placeholder="Digite o nome da pizza ou bebida...">
-        <div id="product" class="product">
-            <h2 id="name"></h2>
-            <img id="image" src="" alt="">
-            <p id="description"></p>
-        </div>
-    </div>
-
-    <div class="mosaic" id="mosaic"></div>
-
-    <div class="popup-overlay" id="popupOverlay"></div>
-    <div class="popup" id="popup">
-        <button class="popup-close" id="popupClose">&times;</button>
-        <h2 id="popupName"></h2>
-        <img id="popupImage" src="" alt="">
-        <p id="popupDescription"></p>
-    </div>
     
-
+     <!-- Vídeo de fundo -->
+    <video autoplay muted loop id="video-background">
+        <source src="https://www.shutterstock.com/shutterstock/videos/3469566733/preview/stock-footage-close-up-of-delicious-pepperoni-pizza-with-salami-tomato-and-cheese-is-baking-in-electric-oven-at.webm" type="video/mp4">
+        Seu navegador não suporta o elemento de vídeo.
+    </video>
     
+    <div class="foto-logo">
+        <img class="pizza_home" src="./assets/pizza_home.png" alt="">
+    </div>
+
+     <!-- Botão posicionado abaixo do  centro -->
+     <button id="btn" onclick="window.location.href='home.html'">Entrar</button>
+    
+    <script>
+        // Efeito de profundidade 3D no botão com o movimento do mouse
+        document.addEventListener("mousemove", function(event) {
+            let x = (window.innerWidth / 2 - event.pageX) / 20;
+            let y = (window.innerHeight / 2 - event.pageY) / 20;
+            document.querySelector(".parallax").style.transform = `translate(${x}px, ${y}px)`;
+
+            // O botão se aproxima do mouse (transformação 3D)
+            let scale = 1 + (Math.abs(x) + Math.abs(y)) / 100;
+            document.querySelector("#btn").style.transform = `translateZ(50px) scale(${scale})`;
+        });
+
+    </script>
+
 </body>
 </html>
