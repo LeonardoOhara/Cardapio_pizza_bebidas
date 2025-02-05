@@ -1,3 +1,5 @@
+
+
 @media (max-width: 768px) {
     .mosaic-item {
         width: calc(100% / 5 - 10px);
@@ -16,15 +18,10 @@
     #toggle-button-container {
         width: 100%; /* Garante que o container ocupe toda a largura da tela */
         justify-content: space-between;
-        
-        
-    
     }
 
     #voiceButton, #toggle-button {
         width: 120px; /* Mantém o tamanho fixo */
-        
-        
     }
-    
+
 }

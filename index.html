@@ -8,34 +8,21 @@
     <link rel="stylesheet" href="./CSS/index.css">
 </head>
 <body>
-
     
-     <!-- Vídeo de fundo -->
-    <video autoplay muted loop id="video-background">
-        <source src="https://www.shutterstock.com/shutterstock/videos/3469566733/preview/stock-footage-close-up-of-delicious-pepperoni-pizza-with-salami-tomato-and-cheese-is-baking-in-electric-oven-at.webm" type="video/mp4">
-        Seu navegador não suporta o elemento de vídeo.
-    </video>
+    <main>
+    <div class="onda-fundo">
+        <div class="onda" style="top: 30%; left: 20%; width: 150px; height: 150px;"></div>
+        <div class="onda" style="top: 50%; left: 60%; width: 180px; height: 180px;"></div>
+        <div class="onda" style="top: 70%; left: 40%; width: 200px; height: 200px;"></div>
+        <div class="onda" style="top: 10%; left: 80%; width: 120px; height: 120px;"></div>
+        <div class="onda" style="top: 80%; left: 10%; width: 170px; height: 170px;"></div>
+      </div>
     
-    <div class="foto-logo">
-        <img class="pizza_home" src="./assets/pizza_home.png" alt="">
-    </div>
-
-     <!-- Botão posicionado abaixo do  centro -->
-     <button id="btn" onclick="window.location.href='home.html'">Entrar</button>
-    
-    <script>
-        // Efeito de profundidade 3D no botão com o movimento do mouse
-        document.addEventListener("mousemove", function(event) {
-            let x = (window.innerWidth / 2 - event.pageX) / 20;
-            let y = (window.innerHeight / 2 - event.pageY) / 20;
-            document.querySelector(".parallax").style.transform = `translate(${x}px, ${y}px)`;
-
-            // O botão se aproxima do mouse (transformação 3D)
-            let scale = 1 + (Math.abs(x) + Math.abs(y)) / 100;
-            document.querySelector("#btn").style.transform = `translateZ(50px) scale(${scale})`;
-        });
-
-    </script>
-
+      <div class="home_container">
+        <img src="./assets/pizza_home.png" alt="Foto de pizza" class="foto_pizza">
+        <button class="btn" onclick="window.location.href='./home.html'">Clique Aqui</button>
+      </div>
+    </main>
+  
 </body>
 </html>

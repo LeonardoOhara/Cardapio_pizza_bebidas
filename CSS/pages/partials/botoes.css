@@ -10,7 +10,7 @@
 }
 
 #voiceButton, #toggle-button {
-    background-color: #db6724;
+    background-color: #18af25;
     color: white;
     padding: 5px 10px;
     border: none;
@@ -28,7 +28,19 @@
 }
 
 #toggle-button.desativado {
-    background-color: rgb(59, 160, 118);
+    background-color: rgb(99, 160, 59);
 }
 
+#voiceButton:hover {
+    background-color: #c52323;
+}
 
+#backButton {
+    padding: 10px 20px;
+    font-size: 16px;
+    background-color: #e2280f;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}

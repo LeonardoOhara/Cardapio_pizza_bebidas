@@ -3,3 +3,5 @@
 @import url(./pages/partials/partials.css);
 
 @import url(./mediaquery.css);
+
+@import url(./pages/global/media_desk.css);

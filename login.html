@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login e Cadastro</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bcryptjs/2.4.3/bcrypt.min.js"></script>
+
     <style>
         * {
             margin: 0;
@@ -115,13 +117,19 @@
 
             if (name && email && password) {
                 let users = JSON.parse(localStorage.getItem("users")) || [];
+
                 if (users.some(user => user.email === email)) {
                     alert("E-mail já cadastrado!");
                     return;
                 }
 
-                users.push({ name, email, password });
+                // Gerar um hash seguro para a senha
+                let salt = bcrypt.genSaltSync(10);
+                let hashedPassword = bcrypt.hashSync(password, salt);
+
+                users.push({ name, email, password: hashedPassword });
                 localStorage.setItem("users", JSON.stringify(users));
+
                 alert("Cadastro realizado com sucesso!");
                 toggleForms();
             } else {
@@ -129,38 +137,32 @@
             }
         }
 
+
         function login() {
             let email = document.getElementById("loginEmail").value;
             let password = document.getElementById("loginPassword").value;
 
             let users = JSON.parse(localStorage.getItem("users")) || [];
-            let user = users.find(user => user.email === email && user.password === password);
+            let user = users.find(user => user.email === email);
 
-            if (user) {
-                localStorage.setItem("loggedUser", JSON.stringify(user));
+            if (user && bcrypt.compareSync(password, user.password)) {
+                // Armazena o login apenas durante a sessão do navegador
+                sessionStorage.setItem("loggedUser", JSON.stringify({ name: user.name, email: user.email }));
+
                 showWelcomeScreen(user.name);
             } else {
                 alert("E-mail ou senha incorretos!");
             }
         }
-
-        function showWelcomeScreen(name) {
-            document.getElementById("loginForm").classList.add("hidden");
-            document.getElementById("registerForm").classList.add("hidden");
-            document.getElementById("welcomeScreen").classList.remove("hidden");
-            document.getElementById("userName").innerText = name;
+        let loggedUser = JSON.parse(sessionStorage.getItem("loggedUser"));
+        if (loggedUser) {
+            showWelcomeScreen(loggedUser.name);
         }
 
         function logout() {
-            localStorage.removeItem("loggedUser");
+            sessionStorage.removeItem("loggedUser");
             document.getElementById("loginForm").classList.remove("hidden");
             document.getElementById("welcomeScreen").classList.add("hidden");
-        }
-
-        // Verifica se há um usuário logado
-        let loggedUser = JSON.parse(localStorage.getItem("loggedUser"));
-        if (loggedUser) {
-            showWelcomeScreen(loggedUser.name);
         }
     </script>
 
