@@ -16,10 +16,6 @@
   filter: blur(1px); /* Efeito de desfoque no botão */
 }
 
-/* Estilo para a foto */
-.foto_pizza {
-  width: 350px;
-}
 
 /* Efeito de onda vermelha no fundo */
 .onda-fundo {
