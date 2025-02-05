@@ -72,15 +72,41 @@ Grandes Telas: acima de 1200px
 }
 
 @media screen and (min-width:992px) and (max-width:1200px){ /* DESKTOP */
+    
    
 }
     
 
-@media screen and (max-width:1900px) { /* TELAS GRANDES */
+@media screen and (min-width:1200px) { /* TELAS GRANDES */
     .foto_pizza {
-        width: 350px;
+        width: 450px;
         margin: 60px;
       }
+    
+  .container > h1 {
+    text-align: center;
+    font-size: 1.6em;
+    font-weight: 600;
+    padding: 50px;
+  }
 
+  .container > p {
+    text-align: center;
+    font-size: 1.3em;
+  }
+
+  .mosaic-item {
+    width: calc(90% / 8 - 10px);
+}
+
+.mosaic-item > p {
+    text-align: center;
+    font-size: 1em;
+}
+
+#toggle-button-container {
+    width: 100%; /* Garante que o container ocupe toda a largura da tela */
+    justify-content: space-between;
+}
 
 }

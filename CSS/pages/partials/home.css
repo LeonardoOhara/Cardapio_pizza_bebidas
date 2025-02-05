@@ -16,16 +16,10 @@ input {
     justify-content: center;
   }
 
-  .container > h1 {
-    text-align: center;
-    font-size: 1.6em;
-    font-weight: 600;
-    padding: 50px;
-  }
-
   .container > p {
     text-align: center;
     font-size: 1em;
+    padding: 20px;
   }
 
   .mosaic-item {
@@ -53,7 +47,7 @@ input {
 
 
   .foto_pizza {
-    width: 350px;
+    width: 240px;
     margin: 100px;
   }
 
